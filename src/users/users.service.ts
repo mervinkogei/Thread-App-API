@@ -11,11 +11,12 @@ import { InjectModel } from '@nestjs/mongoose';
 export class UsersService {
   constructor(@InjectModel(User.name) private userModel: Model<User>) {}
   create(createUserDto: CreateUserDto) {
-    return 'This action adds a new user';
+    const savedUser = new this.userModel({name:"MArk"})
+    return savedUser.save();
   }
 
   findAll() {
-    return `This action returns all users`;
+    return this.userModel.find().exec();
   }
 
   findOne(id: number) {

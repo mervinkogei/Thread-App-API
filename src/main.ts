@@ -1,11 +1,10 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
+import { ValidationPipe } from '@nestjs/common/pipes/validation.pipe';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  console.log('====================================');
-  console.log(process.env.MONGODB_URI);
-  console.log('====================================');
+  app.useGlobalPipes(new ValidationPipe());
   await app.listen(5000);
 }
 bootstrap();
